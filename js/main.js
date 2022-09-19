@@ -1,8 +1,11 @@
 function randomRangeNum(start, end) {
-  if (start >= end) {
-    return Math.floor(Math.random() * (start - end)) + end;
+  if (start === end) {
+    return start;
   }
-  return Math.floor(Math.random() * (end - start)) + start;
+  if (start > end) {
+    return Math.floor(Math.random() * (start - end + 1)) + end;
+  }
+  return Math.floor(Math.random() * (end - start + 1)) + start;
 }
 
 
