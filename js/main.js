@@ -9,13 +9,7 @@ function randomRangeNum(start, end) {
 }
 
 
-function maxLenghStr(currentStr, maxLengh) {
-  if (currentStr.lenght <= maxLengh) {
-    return true;
-  } else {
-    return false;
-  }
-}
+const maxLenghStr = (currentStr, maxLength) => currentStr <= maxLength;
 
 
 randomRangeNum(20, 30);
