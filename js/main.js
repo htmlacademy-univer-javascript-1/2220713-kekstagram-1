@@ -26,49 +26,39 @@ const sentences = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают.Как можно было поймать такой неудачный момент ? !'
 ];
+const getLikes = () => getRandomPositiveInteger(15, 200);
 
-const photosPattern = 'photos/{{i}}.jpg';
-
-const avatarPattern = 'img/avatar-{{случайное число от 1 до 6}}.svg';
-
+const getRandomDescription = () => descriptions[getRandomPositiveInteger(0, descriptions.length -1)];
 
 const createComment = () => {
   let message = '';
   const sentencesNumber = getRandomPositiveInteger(1, 2);
   for (let i = 0; i < sentencesNumber; i++) {
-    message += `${randomArrayElement(sentences)} `;
+    message += `${sentences[getRandomPositiveInteger(0, sentences.length - 1)]} `;
   }
   return {
     id: getRandomPositiveInteger(0, 25000000),
-    avatar: stringByPattern(avatarPattern, getRandomPositiveInteger(1, 6)),
+    avatar:  `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
     message: message,
-    name: randomArrayElement(names),
+    name: names[getRandomPositiveInteger(0, names.length - 1)],
   };
 };
 
-const createComments = () => {
-  const comments = [];
-  const commentsNumber = getRandomPositiveInteger(1, 3);
-  for (let i = 0; i < commentsNumber; i++) {
-    comments[i] = createComment();
-  }
-  return comments;
-};
-
-const createUser = () => ({
-  id: getRandomPositiveInteger(1, 25),
-  url: stringByPattern(photosPattern, getRandomPositiveInteger(1, 25)),
-  description: randomArrayElement(descriptions),
-  likes: getRandomPositiveInteger(15, 200),
-  comments: createComments()
+const getPost = (id) => ({
+  id: id,
+  url: `photos/${id}.jpg`,
+  descriptions: getRandomDescription(),
+  likes: getLikes(),
+  comments: Array.from({length: getRandomPositiveInteger(1, 4)}, createComment)
 });
 
-function stringByPattern(pattern, i) {
-  const leftBracket = pattern.indexOf('{');
-  const rightBracket = pattern.lastIndexOf('}');
-  return pattern.substring(0, leftBracket) + i + pattern.substring(rightBracket + 1, pattern.length);
-}
-
+const generatePosts = () => {
+  const posts = [];
+  for (let i = 1; i <= 25; i++) {
+    posts.push(getPost(i));
+  }
+  return posts;
+};
 
 function getRandomPositiveInteger(start, end) {
   if (start === end) {
@@ -80,14 +70,9 @@ function getRandomPositiveInteger(start, end) {
   return Math.floor(Math.random() * (end - start + 1)) + start;
 }
 
-function randomArrayElement(array) {
-  return array[getRandomPositiveInteger(0, array.length - 1)];
-}
-
-
 // eslint-disable-next-line no-unused-vars
 const checkStringLength = (currentStr, maxLength) => currentStr <= maxLength;
 
 // eslint-disable-next-line no-console
-console.log(createUser());
+console.log(generatePosts());
 
