@@ -1,4 +1,4 @@
-function randomRangeNum(start, end) {
+function getRandomPositiveInteger(start, end) {
   if (start === end) {
     return start;
   }
@@ -9,8 +9,8 @@ function randomRangeNum(start, end) {
 }
 
 
-const maxLenghStr = (currentStr, maxLength) => currentStr <= maxLength;
+const checkStringLength = (currentStr, maxLength) => currentStr <= maxLength;
 
 
-randomRangeNum(20, 30);
-maxLenghStr('2000', 2);
+getRandomPositiveInteger(20, 30);
+checkStringLength('2000', 2);
