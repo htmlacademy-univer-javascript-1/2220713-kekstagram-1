@@ -1,5 +1,4 @@
 import { generatePosts } from './data.js';
+import {renderModel} from './renderingModels.js';
 
-// eslint-disable-next-line no-console
-console.log(generatePosts());
-
+renderModel(generatePosts());
