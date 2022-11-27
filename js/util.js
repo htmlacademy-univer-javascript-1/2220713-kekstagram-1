@@ -1,4 +1,4 @@
-export function getRandomPositiveInteger(start, end) {
+export const getRandomPositiveInteger = (start, end) => {
   if (start === end) {
     return start;
   }
