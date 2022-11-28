@@ -16,6 +16,7 @@ const closeWindowWithEsc = (evt) => {
   if (evt.keyCode === 27) {
     evt.preventDefault();
     closeWindow();
+    document.removeEventListener('keydown', closeWindowWithEsc);
   }
 };
 
