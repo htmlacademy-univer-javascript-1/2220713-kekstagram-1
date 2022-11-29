@@ -1,4 +1,4 @@
-const REGEXP = '^#[A-Za-zА-Яа-яЁё0-9]{1,19}$';
+const REGEXP = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 import {checkStringLength} from './util.js';
 
@@ -12,7 +12,7 @@ const pristine = new Pristine(form, {
   successClass: 'has-success',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'p',
-});
+}, false);
 
 const validateComment = (value) => checkStringLength(value.length, 140);
 
@@ -20,11 +20,10 @@ const validateHashtags = (hashtags) => {
   if (hashtags.length === 0) {
     return true;
   }
-  const hashtagsRegexp = new RegExp(`^${REGEXP}( ${REGEXP})*$`);
   const separateHashtags = hashtags.split(' ');
   const setHashtags = new Set();
   for (const hashtag of separateHashtags) {
-    if (!hashtagsRegexp.test(hashtag)) {
+    if (!REGEXP.test(hashtag)) {
       return false;
     }
     const loweredHashtag = hashtag.toLowerCase();

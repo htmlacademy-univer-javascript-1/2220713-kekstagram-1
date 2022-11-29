@@ -16,6 +16,7 @@ const closeWindowWithEsc = (evt) => {
   if (evt.keyCode === 27) {
     evt.preventDefault();
     closeWindow();
+    document.removeEventListener('keydown', closeWindowWithEsc);
   }
 };
 
@@ -43,8 +44,6 @@ const createCommentsList = (comments) => {
     listElem.appendChild(p);
     commentsList.appendChild(listElem);
   }
-  countComments.classList.add('hidden');
-  loadComments.classList.add('hidden');
 };
 
 const changeDataOfPhoto = (imgElem) => {
