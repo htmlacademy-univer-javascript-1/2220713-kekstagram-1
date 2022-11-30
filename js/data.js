@@ -51,7 +51,7 @@ const getPost = (id) => ({
   url: `photos/${id}.jpg`,
   descriptions: getRandomDescription(),
   likes: getLikes(),
-  comments: Array.from({length: getRandomPositiveInteger(1, 4)}, createComment)
+  comments: Array.from({length: getRandomPositiveInteger(1, 20)}, createComment)
 });
 
 export const generatePosts = () => {

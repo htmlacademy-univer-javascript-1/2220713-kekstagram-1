@@ -1,15 +1,28 @@
+const FIRST_FIVE_VALUE = 5;
 const commentsList = document.querySelector('.social__comments');
 const mainElem = document.querySelector('.big-picture');
 const countComments = document.querySelector('.social__comment-count');
+const firstcountComments = document.querySelector('.first-comments-count');
 const loadComments = document.querySelector('.comments-loader');
 const body = document.querySelector('body');
-
+let balanceСounter = 0;
+let index = 5;
+let currentIndex = 0;
 
 const closeWindow = () => {
   mainElem.classList.add('hidden');
   body.classList.remove('modal-open');
   countComments.classList.remove('hidden');
   loadComments.classList.remove('hidden');
+  const prevComments = mainElem.querySelectorAll('.social__comment');
+  firstcountComments.textContent = 5;
+  balanceСounter = 0;
+  index = 5;
+  currentIndex = 0;
+  loadComments.disabled = false;
+  for (const prevComment of prevComments) {
+    prevComment.remove();
+  }
 };
 
 const closeWindowWithEsc = (evt) => {
@@ -21,24 +34,35 @@ const closeWindowWithEsc = (evt) => {
 };
 
 const createCommentsList = (comments) => {
-  const prevComments = mainElem.querySelectorAll('.social__comment');
-  for (const prevComment of prevComments) {
-    prevComment.remove();
+  if (index === comments.length) {
+    loadComments.disabled = true;
+    return;
   }
-  for (const comment of comments) {
+  if (balanceСounter > 0 && balanceСounter - FIRST_FIVE_VALUE >= 0) {
+    index += FIRST_FIVE_VALUE;
+    firstcountComments.textContent = index;
+    currentIndex += FIRST_FIVE_VALUE;
+  }
+  else if (balanceСounter > 0 && balanceСounter - FIRST_FIVE_VALUE <= 0){
+    currentIndex = index;
+    index = comments.length;
+    firstcountComments.textContent = index;
+  }
+  balanceСounter = comments.length - firstcountComments.textContent;
+  for (let i = currentIndex; i < index; i++) {
     const listElem = document.createElement('li');
     listElem.classList.add('social__comment');
 
     const img = document.createElement('img');
     img.classList.add('social__picture');
-    img.src = comment.avatar;
-    img.alt = comment.name;
+    img.src = comments[i].avatar;
+    img.alt = comments[i].name;
     img.width = '35';
     img.height = '35';
 
     const p = document.createElement('p');
     p.classList.add('social__text');
-    p.textContent = comment.message;
+    p.textContent = comments[i].message;
 
     listElem.appendChild(img);
     listElem.appendChild(p);
@@ -62,4 +86,7 @@ export const showBigModel = (data) => {
     closeWindow();
   });
   document.addEventListener('keydown', closeWindowWithEsc);
+  loadComments.addEventListener('click', () => {
+    createCommentsList(data.comments);
+  });
 };
