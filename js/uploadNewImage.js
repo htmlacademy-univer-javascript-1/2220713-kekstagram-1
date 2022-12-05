@@ -4,6 +4,7 @@ const uploadFile = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
 const buttonClose = document.querySelector('#upload-cancel');
+const scaleValue = document.querySelector('.scale__control--value');
 
 const closeWindow = () => {
   imgUploadOverlay.classList.add('hidden');
@@ -28,6 +29,7 @@ buttonClose.addEventListener('click', () => {
 uploadFile.addEventListener('change', () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
+  scaleValue.value = '100%';
   document.addEventListener('keydown', (evt) => {
     closeWindowWithEsc(evt);
   });
