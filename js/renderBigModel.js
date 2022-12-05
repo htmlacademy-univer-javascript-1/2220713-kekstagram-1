@@ -33,7 +33,7 @@ const createCommentForList = (comment) => {
 const createCommentsList = () => {
   const comments = arrOfComments;
   if (index === comments.length) {
-    loadComments.disabled = true;
+    loadComments.classList.add('hidden');
     return;
   }
 
@@ -77,7 +77,7 @@ const closeWindow = () => {
   index = 5;
   currentIndex = 0;
   arrOfComments = [];
-  loadComments.disabled = false;
+  loadComments.classList.remove('hidden');
   loadComments.removeEventListener('click', onClickComments);
   for (const prevComment of prevComments) {
     prevComment.remove();
