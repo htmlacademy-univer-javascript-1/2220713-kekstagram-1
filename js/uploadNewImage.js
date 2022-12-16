@@ -1,4 +1,5 @@
 import {form, hashtag, comment, validateForm} from './uploadImgValidation.js';
+import { sendData } from './loadData.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -36,7 +37,10 @@ uploadFile.addEventListener('change', () => {
 });
 
 form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
   if (!validateForm()) {
-    evt.preventDefault();
+    return;
   }
+  sendData(new FormData(evt.target));
+  closeWindow();
 });

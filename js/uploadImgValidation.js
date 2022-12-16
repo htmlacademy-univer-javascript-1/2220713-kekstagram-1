@@ -12,7 +12,7 @@ const pristine = new Pristine(form, {
   successClass: 'has-success',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'p',
-}, false);
+});
 
 const validateComment = (value) => checkStringLength(value.length, 140);
 
