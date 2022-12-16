@@ -1,5 +1,6 @@
-import { generatePosts } from './data.js';
 import {renderModel} from './renderingModels.js';
+import { getData } from './loadData.js';
 
-renderModel(generatePosts());
+
+getData(renderModel);
 
