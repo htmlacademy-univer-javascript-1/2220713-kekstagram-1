@@ -33,7 +33,6 @@ const createCommentForList = (comment) => {
 const createCommentsList = () => {
   const comments = arrOfComments;
   if (index === comments.length) {
-    loadComments.classList.add('hidden');
     return;
   }
 
@@ -49,7 +48,7 @@ const createCommentsList = () => {
     currentIndex += FIRST_FIVE_VALUE;
   }
 
-  if (balanceСounter > 0 && balanceСounter - FIRST_FIVE_VALUE <= 0){
+  if (balanceСounter > 0 && balanceСounter - FIRST_FIVE_VALUE < 0){
     currentIndex = index;
     index = comments.length;
     firstcountComments.textContent = index;
@@ -64,6 +63,9 @@ const createCommentsList = () => {
 
 const onClickComments = () => {
   createCommentsList();
+  if (index === arrOfComments.length) {
+    loadComments.classList.add('hidden');
+  }
 };
 
 const closeWindow = () => {

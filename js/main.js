@@ -1,6 +1,6 @@
-import {renderModel} from './renderingModels.js';
 import { getData } from './loadData.js';
+import { renderImg } from './renderingModels.js';
 
 
-getData(renderModel);
+getData(renderImg);
 
