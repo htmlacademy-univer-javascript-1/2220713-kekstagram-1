@@ -1,5 +1,6 @@
 import {form, hashtag, comment, validateForm} from './uploadImgValidation.js';
 import { sendData } from './loadData.js';
+import { uploadFiles } from './uploadFile.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -31,6 +32,7 @@ uploadFile.addEventListener('change', () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   scaleValue.value = '100%';
+  uploadFiles(uploadFile.files[0]);
   document.addEventListener('keydown', (evt) => {
     closeWindowWithEsc(evt);
   });
