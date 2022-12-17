@@ -8,5 +8,24 @@ export const getRandomPositiveInteger = (start, end) => {
   return Math.floor(Math.random() * (end - start + 1)) + start;
 };
 
-// eslint-disable-next-line no-unused-vars
 export const checkStringLength = (currentStr, maxLength) => currentStr <= maxLength;
+
+export const randomElements = (n, array) => array.sort(() => Math.random() - Math.random()).slice(0, n);
+
+let timeoutId;
+
+export const debounce = (callback, timeoutDelay = 500) => {
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(callback, timeoutDelay);
+};
+
+export function throttle(callback, delayBetweenFrames) {
+  let lastTime = 0;
+  return (...rest) => {
+    const now = new Date();
+    if (now - lastTime >= delayBetweenFrames) {
+      callback.apply(this, rest);
+      lastTime = now;
+    }
+  };
+}

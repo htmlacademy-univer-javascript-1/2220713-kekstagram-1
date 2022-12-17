@@ -16,10 +16,10 @@ const closeWindow = () => {
 };
 
 const closeWindowWithEsc = (evt) => {
-  if (evt.code === 'Escape' && !(evt.target.matches('input')) && !(evt.target.matches('textarea'))) {
+  if (evt.code === 'Escape' && !(evt.target.matches('input[name="hashtags"]')) && !(evt.target.matches('textarea[name="description"]'))) {
     evt.preventDefault();
-    closeWindow();
     document.removeEventListener('keydown', closeWindowWithEsc);
+    closeWindow();
   }
 };
 
